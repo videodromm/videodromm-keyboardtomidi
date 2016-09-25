@@ -95,9 +95,14 @@ void KeyboardToMidiApp::setup()
 void KeyboardToMidiApp::keyDown(KeyEvent event)
 {
 	CI_LOG_V((int)event.getCode());
-
+	mVDSettings->mMsg = toString((int)event.getCode());
 	// Animation did not handle the key, so handle it here
 	switch (event.getCode()) {
+	case 0:
+		//orange et vert
+		mColor = ColorA(0.0f, 0.5f, 0.0f, 1.0f);
+
+		break;
 	case KeyEvent::KEY_ESCAPE:
 		// quit the application
 		quit();
