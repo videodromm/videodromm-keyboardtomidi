@@ -99,39 +99,39 @@ void KeyboardToMidiApp::keyDown(KeyEvent event)
 	// Animation did not handle the key, so handle it here
 	switch (event.getCode()) {
 	case 0:
-		//orange et vert
+		//vert
 		mColor = ColorA(0.0f, 0.5f, 0.0f, 1.0f);
-
+		mVDRouter->midiOutSendNoteOn(1, 1, 46, 64);
+		break;
+	case 106:
+		//blanc
+		mColor = ColorA(0.0f, 0.0f, 0.0f, 1.0f);
+		mVDRouter->midiOutSendNoteOn(1, 1, 45, 64);
 		break;
 	case KeyEvent::KEY_ESCAPE:
 		// quit the application
 		quit();
 		break;
-	case KeyEvent::KEY_UP:
-		// vert
+	case 264:
+		// bleu
 		mColor = ColorA(0.0f, 1.0f, 0.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 40, 64);
+		mVDRouter->midiOutSendNoteOn(1, 1, 44, 64);
 		//mVDRouter->
 		break;
-	case KeyEvent::KEY_KP6:
+	case 260:
 		// jaune
 		mColor = ColorA(1.0f, 1.0f, 0.0f, 1.0f);
 		mVDRouter->midiOutSendNoteOn(1, 1, 42, 64);
 		break;
-	case KeyEvent::KEY_RETURN:
-		// rouge
+	case 120:
+		// vert2
 		mColor = ColorA(1.0f, 0.0f, 0.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 43, 64);
+		mVDRouter->midiOutSendNoteOn(1, 1, 41, 64);
 		break;
-	case KeyEvent::KEY_KP2:
-		// bleu
+	case 57:
+		// rouge
 		mColor = ColorA(0.0f, 0.0f, 1.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 45, 64);
-		break;
-	case KeyEvent::KEY_DELETE:
-		// blanc
-		mColor = ColorA(1.0f, 1.0f, 1.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 47, 64);
+		mVDRouter->midiOutSendNoteOn(1, 1, 40, 64);
 		break;
 	}
 
