@@ -77,7 +77,7 @@ void KeyboardToMidiApp::keyDown(KeyEvent event)
 		// quit the application
 		quit();
 		break;
-	case 264:
+	case 273:
 		// bleu
 		mColor = ColorA(0.0f, 1.0f, 0.0f, 1.0f);
 		mVDSession->midiOutSendNoteOn(1, 1, 44, 64);
@@ -87,6 +87,11 @@ void KeyboardToMidiApp::keyDown(KeyEvent event)
 		// jaune
 		mColor = ColorA(1.0f, 1.0f, 0.0f, 1.0f);
 		mVDSession->midiOutSendNoteOn(1, 1, 42, 64);
+		break;
+	case 53:
+		// petit vert
+		mColor = ColorA(0.0f, 1.0f, 0.0f, 1.0f);
+		mVDSession->midiOutSendNoteOn(1, 1, 48, 64);
 		break;
 	case 120:
 		// vert2
