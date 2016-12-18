@@ -117,6 +117,8 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIWarps.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDWebsocket.h" />
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\HapSupport.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\MovieHap.h" />
@@ -165,6 +167,8 @@
     <ClInclude Include="..\..\..\Cinder\blocks\OSC\src\cinder\osc\Osc.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIWarps.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDWebsocket.cpp" />
     <ClCompile Include="..\src\KeyboardToMidiApp.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\MovieHap.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\HapSupport.c" />

@@ -6,14 +6,6 @@
 #include "VDSettings.h"
 // Session
 #include "VDSession.h"
-// Animation
-#include "VDAnimation.h"
-// Log
-#include "VDLog.h"
-// Utils
-#include "VDUtils.h"
-// Message router
-#include "VDRouter.h"
 // UserInterface
 #include "CinderImGui.h"
 // UI
@@ -43,18 +35,8 @@ private:
 	VDSettingsRef				mVDSettings;
 	// Session
 	VDSessionRef				mVDSession;
-	// Log
-	VDLogRef					mVDLog;
-	// Animation
-	VDAnimationRef				mVDAnimation;
-	// Utils
-	VDUtilsRef					mVDUtils;
-	// Message router
-	VDRouterRef					mVDRouter;
 	// UI
 	VDUIRef						mVDUI;
-	// Mix
-	VDMixList					mMixes;
 	fs::path					mMixesFilepath;
 
 	ColorA						mColor;
@@ -70,25 +52,8 @@ void KeyboardToMidiApp::setup()
 	mVDSettings = VDSettings::create();
 	// Session
 	mVDSession = VDSession::create(mVDSettings);
-	// Utils
-	mVDUtils = VDUtils::create(mVDSettings);
-	// Animation
-	mVDAnimation = VDAnimation::create(mVDSettings, mVDSession);
-	// Message router
-	mVDRouter = VDRouter::create(mVDSettings, mVDAnimation, mVDSession);
-	// Mix
-	mMixesFilepath = getAssetPath("") / mVDSettings->mAssetsPath / "mixes.xml";
-	if (fs::exists(mMixesFilepath)) {
-		// load textures from file if one exists
-		mMixes = VDMix::readSettings(mVDSettings, mVDAnimation, mVDRouter, loadFile(mMixesFilepath));
-	}
-	else {
-		// otherwise create a texture from scratch
-		mMixes.push_back(VDMix::create(mVDSettings, mVDAnimation, mVDRouter));
-	}
-	mVDAnimation->tapTempo();
 	// UI
-	mVDUI = VDUI::create(mVDSettings, mMixes[0], mVDRouter, mVDAnimation, mVDSession);
+	mVDUI = VDUI::create(mVDSettings, mVDSession);
 
 	mColor = ColorA(0.5f, 0.0f, 0.2f, 1.0f);
 }
@@ -101,12 +66,12 @@ void KeyboardToMidiApp::keyDown(KeyEvent event)
 	case 0:
 		//vert
 		mColor = ColorA(0.0f, 0.5f, 0.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 46, 64);
+		mVDSession->midiOutSendNoteOn(1, 1, 46, 64);
 		break;
 	case 106:
 		//blanc
 		mColor = ColorA(0.0f, 0.0f, 0.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 45, 64);
+		mVDSession->midiOutSendNoteOn(1, 1, 45, 64);
 		break;
 	case KeyEvent::KEY_ESCAPE:
 		// quit the application
@@ -115,30 +80,30 @@ void KeyboardToMidiApp::keyDown(KeyEvent event)
 	case 264:
 		// bleu
 		mColor = ColorA(0.0f, 1.0f, 0.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 44, 64);
+		mVDSession->midiOutSendNoteOn(1, 1, 44, 64);
 		//mVDRouter->
 		break;
 	case 260:
 		// jaune
 		mColor = ColorA(1.0f, 1.0f, 0.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 42, 64);
+		mVDSession->midiOutSendNoteOn(1, 1, 42, 64);
 		break;
 	case 120:
 		// vert2
 		mColor = ColorA(1.0f, 0.0f, 0.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 41, 64);
+		mVDSession->midiOutSendNoteOn(1, 1, 41, 64);
 		break;
 	case 57:
 		// rouge
 		mColor = ColorA(0.0f, 0.0f, 1.0f, 1.0f);
-		mVDRouter->midiOutSendNoteOn(1, 1, 40, 64);
+		mVDSession->midiOutSendNoteOn(1, 1, 40, 64);
 		break;
 	}
 
 }
 void KeyboardToMidiApp::keyUp(KeyEvent event)
 {
-	if (!mVDAnimation->handleKeyUp(event)) {
+	if (!mVDSession->handleKeyUp(event)) {
 		// Animation did not handle the key, so handle it here
 	}
 }
