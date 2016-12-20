@@ -68,6 +68,11 @@ void KeyboardToMidiApp::keyDown(KeyEvent event)
 		mColor = ColorA(0.0f, 0.5f, 0.0f, 1.0f);
 		mVDSession->midiOutSendNoteOn(1, 1, 46, 64);
 		break;
+	case 276:
+		//jaune
+		mColor = ColorA(1.0f, 1.0f, 0.0f, 1.0f);
+		mVDSession->midiOutSendNoteOn(1, 1, 49, 64);
+		break;
 	case 106:
 		//blanc
 		mColor = ColorA(0.0f, 0.0f, 0.0f, 1.0f);
